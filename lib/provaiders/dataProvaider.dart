@@ -1,10 +1,3 @@
-import 'dart:async' show Future;
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-
-String url = 'https://app-nombre.firebaseio.com/masculino.json';
-
 class Name {
   final String id;
   final String nombre;
@@ -13,36 +6,15 @@ class Name {
 
   Name({this.id, this.nombre, this.origen, this.significado});
 
-  Future<List<Name>> loadData() async {
-   
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      List<Name> names = [];
-
-      for (var i in json) {
-
-        Name name = Name(id:i['id'], nombre:i['nombre'], origen:i['origen'], significado:i['signifcado']);
-        
-        names.add(name);
-        
-      }
-
-      print(names.length);
-      return names;
-
-
-    } else {
-      throw Exception('Failed to load Data');
-    }
-
+  factory Name.fromJson(Map<String, dynamic> json) {
+    return Name(
+      id: json['id'] as String,
+      nombre: json['nombre'] as String,
+      origen: json['origen'] as String,
+      significado: json['signifcado'] as String,
+    );
   }
-
 }
-
-
-final nombre = new Name(); 
 
 
 // class Name {
@@ -63,7 +35,6 @@ final nombre = new Name();
 
 //     if (response.statusCode == 200) {
 //       final json = jsonDecode(response.body);
-
 
 //     } else {
 //       throw Exception('Failed to load Data');
