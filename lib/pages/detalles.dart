@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class Detalles extends StatefulWidget {
@@ -13,34 +14,46 @@ class Detalles extends StatefulWidget {
 }
 
 class _DetallesState extends State<Detalles> {
+
+  FlutterTts flutterTts = FlutterTts();
+
+  Future _speak(nombre) async{
+    await flutterTts.setLanguage('es-ES');
+    await flutterTts.speak(nombre);
+    // if (result == 1) setState(() => ttsState = TtsState.playing);
+}
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xfff0f2f5),
-        appBar: AppBar(
-          elevation: 0,
-          leading: IconButton(
-              icon: Icon(
-                LineAwesomeIcons.chevron_circle_left,
-                color: Colors.indigo[900],
-                size: 32,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          title: Center(
-            child: Text(
-              'Detalles del Nombre',
-              style: TextStyle(
-                color: Colors.indigo[900],
-                fontFamily: 'Simply Rounded',
-              ),
-              textAlign: TextAlign.center,
+      backgroundColor: Color(0xfff0f2f5),
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+            icon: Icon(
+              LineAwesomeIcons.chevron_circle_left,
+              color: Colors.indigo[900],
+              size: 32,
             ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        title: Center(
+          child: Text(
+            'Detalles del Nombre',
+            style: TextStyle(
+              color: Colors.indigo[900],
+              fontFamily: 'Simply Rounded',
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
-        body: SingleChildScrollView (
-                  child: Column(children: <Widget>[
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
@@ -49,28 +62,23 @@ class _DetallesState extends State<Detalles> {
                       BorderRadius.only(bottomRight: Radius.circular(35))),
               child: Padding(
                 padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 32,
-                  bottom: 32,
-                  right: 8
-                ),
+                    left: 16, top: 32, bottom: 32, right: 8),
                 child: Row(
                   children: <Widget>[
                     Container(
-                      width: MediaQuery.of(context).size.width*0.53,
+                      width: MediaQuery.of(context).size.width * 0.53,
                       child: Text(
                         this.widget.nombre,
                         style: TextStyle(
                             color: Colors.indigo[900],
                             fontFamily: 'Simply Rounded',
-                            fontSize: 28
-                            ),
+                            fontSize: 28),
                       ),
                     ),
                     Row(
                       children: <Widget>[
                         IconButton(
-                          padding: EdgeInsets.all(0),
+                            padding: EdgeInsets.all(0),
                             icon: Icon(
                               LineAwesomeIcons.paper_plane,
                               color: Colors.indigo[900],
@@ -79,24 +87,23 @@ class _DetallesState extends State<Detalles> {
                             onPressed: null),
                       ],
                     ),
-      
                     IconButton(
-                      padding: EdgeInsets.all(0),
+                        padding: EdgeInsets.all(0),
                         icon: Icon(
                           LineAwesomeIcons.volume_up,
                           color: Colors.indigo[900],
                           size: 28,
                         ),
-                        onPressed: null),
+                        onPressed: () => _speak(this.widget.nombre) ),
                     Container(
                       child: IconButton(
-                        padding: EdgeInsets.all(0),
-                        icon:Icon(
-                         LineAwesomeIcons.heart_o,
+                          padding: EdgeInsets.all(0),
+                          icon: Icon(
+                            LineAwesomeIcons.heart_o,
                             color: Colors.indigo[900],
                             size: 28,
-                      ) , 
-                      onPressed: null),
+                          ),
+                          onPressed: null),
                     )
                   ],
                 ),
@@ -163,7 +170,25 @@ class _DetallesState extends State<Detalles> {
                 ),
               ),
             )
-          ]),
-        ));
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(LineAwesomeIcons.home),
+            title: Text('Inicio'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(LineAwesomeIcons.thumbs_up),
+            title: Text('Favoritos'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(LineAwesomeIcons.question_circle),
+            title: Text('Ajuste'),
+          ),
+        ],
+      ),
+    );
   }
 }

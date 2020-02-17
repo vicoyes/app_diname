@@ -112,12 +112,16 @@ class ListfilterState extends State<Listfilter> {
               return GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return Detalles(nombre:names[index].nombre, origen: names[index].origen, significado: names[index].significado,);
-                        },
-                      ),
-                    );
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return Detalles(
+                          nombre: filterName[index].nombre,
+                          origen: filterName[index].origen,
+                          significado: filterName[index].significado,
+                        );
+                      },
+                    ),
+                  );
                 },
                 child: Column(
                   children: <Widget>[
@@ -140,6 +144,22 @@ class ListfilterState extends State<Listfilter> {
               );
             },
           )),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(LineAwesomeIcons.home),
+            title: Text('Inicio'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(LineAwesomeIcons.thumbs_up),
+            title: Text('Favoritos'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(LineAwesomeIcons.question_circle),
+            title: Text('Ajuste'),
+          ),
         ],
       ),
     );

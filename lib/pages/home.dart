@@ -10,26 +10,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xfff0f2f5),
-      appBar: AppBar(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(12),
-          ),
-        ),
-        title: Center(
-          child: Text(
-            'Inicio',
-            style: TextStyle(
-              color: Colors.indigo[900],
-              fontFamily: 'Simply Rounded',
-            ),
-          ),
-        ),
-      ),
-      body: SingleChildScrollView (
+    return SingleChildScrollView (
               child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -210,23 +191,8 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.home),
-            title: Text('Inicio'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.thumbs_up),
-            title: Text('Favoritos'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(LineAwesomeIcons.question_circle),
-            title: Text('Ajuste'),
-          ),
-        ],
-      ),
-    );
+      );
   }
+
+ 
 }
