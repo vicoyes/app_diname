@@ -14,16 +14,21 @@ class Detalles extends StatefulWidget {
 }
 
 class _DetallesState extends State<Detalles> {
-
   FlutterTts flutterTts = FlutterTts();
+  bool _like = true;
+  List <String> like = [];
 
-  Future _speak(nombre) async{
+  Future _speak(nombre) async {
     await flutterTts.setLanguage('es-ES');
     await flutterTts.speak(nombre);
     // if (result == 1) setState(() => ttsState = TtsState.playing);
-}
+  }
 
-  
+  // agregar like
+
+  agregandolike(){
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,16 +99,30 @@ class _DetallesState extends State<Detalles> {
                           color: Colors.indigo[900],
                           size: 28,
                         ),
-                        onPressed: () => _speak(this.widget.nombre) ),
+                        onPressed: () => _speak(this.widget.nombre)),
                     Container(
                       child: IconButton(
                           padding: EdgeInsets.all(0),
-                          icon: Icon(
-                            LineAwesomeIcons.heart_o,
-                            color: Colors.indigo[900],
-                            size: 28,
-                          ),
-                          onPressed: null),
+                          icon: (_like
+                              ? Icon(
+                                  LineAwesomeIcons.heart_o,
+                                  size: 28,
+                                  color: Colors.indigo[900],
+                                )
+                              : Icon(
+                                  LineAwesomeIcons.heart,
+                                  size: 28,
+                                  color: Colors.indigo[900],
+                                )),
+                          onPressed: () {
+                            setState(() {
+                              if (_like) {
+                                _like = false;
+                              } else {
+                                _like = true;
+                              }
+                            });
+                          }),
                     )
                   ],
                 ),
